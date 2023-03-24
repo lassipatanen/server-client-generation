@@ -1,0 +1,177 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: lassi.patanen@gofore.com
+    name: Lassi Patanen
+  description: All your money are belong to us
+  title: Vero API
+  version: "1.0"
+servers:
+- url: http://localhost:4420
+tags:
+- name: vero
+paths:
+  /users/{userId}/tax-cards/{taxCardId}:
+    get:
+      description: Get user tax card information
+      operationId: get-users-userId-tax-cards-taxCardId
+      parameters:
+      - description: user identifier in uuid format
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: tax card identifier in uuid format
+        explode: false
+        in: path
+        name: taxCardId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example 1:
+                  value:
+                    identifier: 14d3030c-3b61-4070-b902-342f80e99364
+                    ssn: string
+                    type: A
+                    validFromDate: 2019-08-24
+                    incomeLimit: 0
+                    percentage: 0
+              schema:
+                $ref: '#/components/schemas/TaxCard'
+          description: Example response
+      summary: Your GET endpoint
+      tags:
+      - vero
+    post:
+      description: Update user tax card information or create new tax card
+      operationId: post-users-userId-tax-cards-taxCardId
+      parameters:
+      - description: user identifier in uuid format
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: tax card identifier in uuid format
+        explode: false
+        in: path
+        name: taxCardId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/PostTaxCardRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                Example 1:
+                  value:
+                    identifier: 14d3030c-3b61-4070-b902-342f80e99364
+                    ssn: string
+                    type: A
+                    validFromDate: 2019-08-24
+                    incomeLimit: 0
+                    percentage: 0
+              schema:
+                $ref: '#/components/schemas/TaxCard'
+          description: Example response
+      summary: ""
+      tags:
+      - vero
+components:
+  requestBodies:
+    PostTaxCardRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/post_users_userId_tax_cards_taxCardId_request'
+  responses:
+    GetTaxCardResponse:
+      content:
+        application/json:
+          examples:
+            Example 1:
+              value:
+                identifier: 14d3030c-3b61-4070-b902-342f80e99364
+                ssn: string
+                type: A
+                validFromDate: 2019-08-24
+                incomeLimit: 0
+                percentage: 0
+          schema:
+            $ref: '#/components/schemas/TaxCard'
+      description: Example response
+    PostTaxCardResponse:
+      content:
+        application/json:
+          examples:
+            Example 1:
+              value:
+                identifier: 14d3030c-3b61-4070-b902-342f80e99364
+                ssn: string
+                type: A
+                validFromDate: 2019-08-24
+                incomeLimit: 0
+                percentage: 0
+          schema:
+            $ref: '#/components/schemas/TaxCard'
+      description: Example response
+  schemas:
+    TaxCard:
+      example:
+        identifier: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        incomeLimit: 0.8008281904610115
+        percentage: 6.027456183070403
+        validFromDate: 2000-01-23
+        type: A
+        ssn: ssn
+      properties:
+        identifier:
+          format: uuid
+          nullable: true
+          type: string
+        ssn:
+          nullable: true
+          type: string
+        type:
+          enum:
+          - A
+          - B
+          nullable: true
+          type: string
+        validFromDate:
+          format: date
+          nullable: true
+          type: string
+        incomeLimit:
+          nullable: true
+          type: number
+        percentage:
+          nullable: true
+          type: number
+      title: TaxCard
+      type: object
+      x-stoplight:
+        id: adk80go2imtmu
+    post_users_userId_tax_cards_taxCardId_request:
+      properties:
+        taxCard:
+          $ref: '#/components/schemas/TaxCard'
+      type: object
+x-stoplight:
+  id: iot43lv60m0qm
+

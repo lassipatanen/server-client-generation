@@ -1,0 +1,49 @@
+openapi: 3.0.0
+x-stoplight:
+  id: b447e4a8ebf4i
+info:
+  title: Vero Productizer
+  version: '1.0'
+  description: Productizer API to transform Vero resources in to data space format
+  contact:
+    name: Lassi Patanen
+    email: lassi.patanen@gofore.com
+servers:
+  - url: 'http://localhost:4410'
+paths:
+  '/get-tax-card/{userId}/{taxCardId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+        description: user identifier in uuid format
+      - schema:
+          type: string
+        name: taxCardId
+        in: path
+        required: true
+        description: tax card identifier in uuid format
+    get:
+      summary: Your GET endpoint
+      tags:
+        - productizer
+      responses:
+        '200':
+          description: OK
+      operationId: get-userId-tax-cards
+      description: get tax card through productizer
+    post:
+      summary: ''
+      operationId: post-get-tax-card-userId-taxCardId
+      responses:
+        '200':
+          description: OK
+      tags:
+        - productizer
+      description: post tax card through productizer
+components:
+  schemas: { }
+tags:
+  - name: productizer

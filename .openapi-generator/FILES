@@ -1,0 +1,13 @@
+src/Testbed.Api.Codegen/.gitignore
+src/Testbed.Api.Codegen/Attributes/ValidateModelStateAttribute.cs
+src/Testbed.Api.Codegen/Authentication/ApiAuthentication.cs
+src/Testbed.Api.Codegen/Controllers/TestbedApi.cs
+src/Testbed.Api.Codegen/Converters/CustomEnumConverter.cs
+src/Testbed.Api.Codegen/Formatters/InputFormatterStream.cs
+src/Testbed.Api.Codegen/Models/PostDraftPersonTaxCard200Response.cs
+src/Testbed.Api.Codegen/Models/PostDraftPersonTaxCardRequest.cs
+src/Testbed.Api.Codegen/Models/PostDraftPersonTaxCardWriteRequest.cs
+src/Testbed.Api.Codegen/Models/TaxCard.cs
+src/Testbed.Api.Codegen/OpenApi/TypeExtensions.cs
+src/Testbed.Api.Codegen/Testbed.Api.Codegen.csproj
+src/Testbed.Api.Codegen/Testbed.Api.Codegen.nuspec

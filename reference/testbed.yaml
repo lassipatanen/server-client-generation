@@ -1,0 +1,113 @@
+openapi: 3.0.0
+x-stoplight:
+  id: gsphd3ivckz5q
+info:
+  title: TestBed
+  version: '1.0'
+  description: TestBed dataspace for standardizing data
+  contact:
+    name: Lassi Patanen
+    email: lassi.patanen@gofore.com
+servers:
+  - url: 'http://localhost:4400'
+paths:
+  /draft/Person/TaxCard:
+    parameters: []
+    post:
+      summary: ''
+      operationId: post-draft-person-tax-card
+      responses:
+        '200':
+          $ref: '#/components/responses/GetTaxCardResponse'
+      description: Get tax card for user from testbed
+      tags:
+        - testbed
+      requestBody:
+        $ref: '#/components/requestBodies/GetTaxCardRequest'
+  /draft/Person/TaxCard/Write:
+    parameters: []
+    post:
+      summary: ''
+      operationId: post-draft-Person-TaxCard-Write
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        $ref: '#/components/requestBodies/PostTaxCardRequest'
+      tags:
+        - testbed
+      description: Create or update tax card using testbed
+components:
+  schemas:
+    TaxCard:
+      title: TaxCard
+      x-stoplight:
+        id: adk80go2imtmu
+      type: object
+      properties:
+        identifier:
+          type: string
+          format: uuid
+          nullable: true
+        ssn:
+          type: string
+        type:
+          type: string
+          enum:
+            - A
+            - B
+        validFromDate:
+          type: string
+          format: date
+        incomeLimit:
+          type: number
+        percentage:
+          type: number
+  requestBodies:
+    GetTaxCardRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              employeeIdentifier:
+                type: string
+    PostTaxCardRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              employeeIdentifier:
+                type: string
+              data:
+                $ref: '#/components/schemas/TaxCard'
+          examples:
+            Example 1:
+              value:
+                employeeIdentifier: string
+                data:
+                  identifier: 14d3030c-3b61-4070-b902-342f80e99364
+                  ssn: string
+                  type: A
+                  validFromDate: '2019-08-24'
+                  incomeLimit: 0
+                  percentage: 0
+  responses:
+    GetTaxCardResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              employeeIdentifier:
+                type: string
+              taxCard:
+                $ref: '#/components/schemas/TaxCard'
+        application/postscript:
+          schema:
+            type: object
+            properties: {}
+tags:
+  - name: testbed

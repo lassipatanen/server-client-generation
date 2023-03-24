@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  db:
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_DATABASE=mongoVeroDatabase
+    volumes:
+      - ./mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+  vero-api:
+    build:
+      dockerfile: Vero/Dockerfile
+      context: ./src
+    ports:
+      - "5081:5081"
+    environment:
+      - DatabaseSettings__ConnectionString=mongodb://db
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5081

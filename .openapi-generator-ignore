@@ -1,0 +1,25 @@
+# Ignore stuff
+git_push.sh
+appveyor.yml
+build.bat
+build.sh
+
+# No solution
+*.sln
+
+# We just want models so no need for API or API Client
+src/*/Api/*
+#src/*/Client/*.cs
+
+#!src/*/Client/OpenAPIDateConverter.cs
+#!src/*/Client/FileParameter.cs
+
+# No TY for test projects
+/src/*-.Codegen.Test/*/*
+
+# No TY to docs
+/docs/*.md
+
+# Don't generate .gitignore or README.MD
+.gitignore
+README.md

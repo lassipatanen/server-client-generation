@@ -1,0 +1,120 @@
+openapi: 3.0.0
+x-stoplight:
+  id: iot43lv60m0qm
+info:
+  title: Vero API
+  version: '1.0'
+  description: All your money are belong to us
+  contact:
+    name: Lassi Patanen
+    email: lassi.patanen@gofore.com
+servers:
+  - url: 'http://localhost:4420'
+paths:
+  '/users/{userId}/tax-cards/{taxCardId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+        description: user identifier in uuid format
+      - schema:
+          type: string
+        name: taxCardId
+        in: path
+        required: true
+        description: tax card identifier in uuid format
+    get:
+      summary: Your GET endpoint
+      tags:
+        - vero
+      responses:
+        '200':
+          $ref: '#/components/responses/GetTaxCardResponse'
+      operationId: get-users-userId-tax-cards-taxCardId
+      description: Get user tax card information
+    post:
+      summary: ''
+      operationId: post-users-userId-tax-cards-taxCardId
+      responses:
+        '200':
+          $ref: '#/components/responses/PostTaxCardResponse'
+      description: Update user tax card information or create new tax card
+      tags:
+        - vero
+      requestBody:
+        $ref: '#/components/requestBodies/PostTaxCardRequest'
+components:
+  schemas:
+    TaxCard:
+      title: TaxCard
+      x-stoplight:
+        id: adk80go2imtmu
+      type: object
+      properties:
+        identifier:
+          type: string
+          format: uuid
+          nullable: true
+        ssn:
+          type: string
+          nullable: true
+        type:
+          type: string
+          enum:
+            - A
+            - B
+          nullable: true
+        validFromDate:
+          type: string
+          format: date
+          nullable: true
+        incomeLimit:
+          type: number
+          nullable: true
+        percentage:
+          type: number
+          nullable: true
+  requestBodies:
+    PostTaxCardRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              taxCard:
+                $ref: '#/components/schemas/TaxCard'
+  responses:
+    GetTaxCardResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaxCard'
+          examples:
+            Example 1:
+              value:
+                identifier: 14d3030c-3b61-4070-b902-342f80e99364
+                ssn: string
+                type: A
+                validFromDate: '2019-08-24'
+                incomeLimit: 0
+                percentage: 0
+    PostTaxCardResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TaxCard'
+          examples:
+            Example 1:
+              value:
+                identifier: 14d3030c-3b61-4070-b902-342f80e99364
+                ssn: string
+                type: A
+                validFromDate: '2019-08-24'
+                incomeLimit: 0
+                percentage: 0
+tags:
+  - name: vero
